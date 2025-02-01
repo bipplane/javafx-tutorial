@@ -44,6 +44,7 @@ public class DialogueBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialogue.getStyleClass().add("reply-label");
     }
 
     public static DialogueBox getUserDialogue(String text, Image img) {

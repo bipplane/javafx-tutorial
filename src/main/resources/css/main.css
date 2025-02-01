@@ -1,0 +1,54 @@
+.root {
+    main-color: rgb(237, 255, 242, 0.1);       /* Create a looked-up color called "main-color" within root. */
+    -fx-background-color: main-color;
+    -fx-background-image: url("../images/background.png"); /* Set image */
+    -fx-background-size: cover; /* Stretch image to fit the window. */
+    -fx-background-repeat: no-repeat; /* Prevent image from repeating. */
+    -fx-font: 12px "Consolas";
+}
+
+.text-field {
+    -fx-background-color: #d9ffe2;
+    -fx-font: 18px "Consolas";
+}
+
+.button {
+    -fx-background-color: deepskyblue;
+    -fx-font: italic bold 16px "Consolas";
+}
+
+.button:hover {
+    -fx-background-color:lightskyblue;
+    -fx-font-size: 18px;
+}
+
+.button:pressed {
+    -fx-background-color:dodgerblue;
+    -fx-font-size: 20px;
+}
+
+.scroll-pane {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-font-size: 10px;  /* Change width of scroll bar. */
+    -fx-background-color: main-color;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #ff9cb4;
+    -fx-background-radius: 1em;
+}
+
+/* Hides the increment and decrement buttons. */
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-pref-height: 0;
+    -fx-opacity: 0;
+}
+
