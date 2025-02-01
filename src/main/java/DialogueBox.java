@@ -1,44 +1,57 @@
+import java.io.IOException;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Node;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Represents a dialogue box consisting of an ImageView to represent the speaker's face
+ * and a label containing text from the speaker.
+ */
 public class DialogueBox extends HBox {
-
-    private Label text;
+    @FXML
+    private Label dialogue;
+    @FXML
     private ImageView displayPicture;
 
-    public DialogueBox(String s, Image i) {
-        text = new Label(s);
-        displayPicture = new ImageView(i);
+    private DialogueBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogueBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true); // Allow text to wrap around
-        displayPicture.setFitHeight(100); // Set the height to 100 pixels
-        displayPicture.setFitWidth(100); // Set the width to 100 pixels
-        displayPicture.setPreserveRatio(true); // Preserve the aspect ratio
-        this.setAlignment(Pos.TOP_RIGHT); // Align to the top right
-
-        this.getChildren().addAll(text, displayPicture);
+        this.dialogue.setText(text);
+        this.displayPicture.setImage(img);
     }
 
+    /**
+     * Flips the dialogue box such that the ImageView is on the left and text on the right.
+     */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
-        ObservableList<Node> tmp = FXCollections
-                .observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogueBox getUserDialog(String s, Image i) {
-        return new DialogueBox(s, i);
+    public static DialogueBox getUserDialogue(String text, Image img) {
+        return new DialogueBox(text, img);
     }
 
-    public static DialogueBox getDukeDialog(String s, Image i) {
-        var db = new DialogueBox(s, i);
+    public static DialogueBox getDukeDialogue(String text, Image img) {
+        var db = new DialogueBox(text, img);
         db.flip();
         return db;
     }
